@@ -6,7 +6,6 @@ import * as AuthApi from "../api/AuthApi";
 interface AuthContextType {
     register: (
         username: string,
-        email: string,
         password: string
     ) => Promise<void>;
 
@@ -31,12 +30,10 @@ export function AuthProvider({ children } : { children : ReactNode}) {
 
     const register = async(
         username: string,
-        email: string,
         password: string
     ) => {
         await AuthApi.register(
             username,
-            email, 
             password
         );
     }

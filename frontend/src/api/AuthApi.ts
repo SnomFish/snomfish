@@ -20,14 +20,12 @@ export function login(
 
 export function register(
     username: string,
-    email: string,
     password: string
 ) {
     return apiFetch<void>(`${BASE_URL}/register`, {
         method: "POST",
         body: JSON.stringify({
             username,
-            email,
             password
         })
     });
