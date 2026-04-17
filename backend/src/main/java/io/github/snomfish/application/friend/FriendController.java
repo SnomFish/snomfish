@@ -20,14 +20,14 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/user/me")
 public class FriendController {
     
 
     private final FriendService userService;
 
 
-    @GetMapping("/me/friends")
+    @GetMapping("/friends")
     public ResponseEntity<FriendListResponse> getFriends(
         Authentication authentication
     ) {
@@ -35,7 +35,7 @@ public class FriendController {
     }
 
 
-    @GetMapping("/me/friend-requests")
+    @GetMapping("/friend-requests")
     public ResponseEntity<FriendRequestListResponse> getFriendRequests(
         Authentication authentication
     ) {
@@ -43,7 +43,7 @@ public class FriendController {
     }
 
 
-    @PostMapping("/me/friend-requests")
+    @PostMapping("/friend-requests")
     public ResponseEntity<FriendResponse> sendFriendRequest(
         Authentication authentication,
         @Valid @RequestBody FriendRequest request
@@ -55,7 +55,7 @@ public class FriendController {
     }
 
 
-    @PostMapping("/me/friend-requests/accept")
+    @PostMapping("/friend-requests/accept")
     public ResponseEntity<FriendResponse> acceptFriendRequest(
         Authentication authentication,
         @Valid @RequestBody AcceptFriendRequest request
@@ -67,7 +67,7 @@ public class FriendController {
     }
 
 
-    @PostMapping("/me/friend-requests/reject")
+    @PostMapping("/friend-requests/reject")
     public ResponseEntity<FriendResponse> rejectFriendRequest(
         Authentication authentication,
         @Valid @RequestBody RejectFriendRequest request
@@ -79,7 +79,7 @@ public class FriendController {
     }
 
 
-    @PostMapping("/me/friends")
+    @PostMapping("/friends")
     public ResponseEntity<FriendResponse> removeFriend(
         Authentication authentication,
         @Valid @RequestBody RemoveFriendRequest request
