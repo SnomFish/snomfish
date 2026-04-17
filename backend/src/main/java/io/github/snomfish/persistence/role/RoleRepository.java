@@ -1,4 +1,4 @@
-package io.github.snomfish.role;
+package io.github.snomfish.persistence.role;
 
 import java.util.Optional;
 

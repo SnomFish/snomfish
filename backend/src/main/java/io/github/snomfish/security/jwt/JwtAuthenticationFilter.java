@@ -14,7 +14,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter{
 
@@ -22,17 +24,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
     private final JwtService jwtService;
     private final JwtCookieService jwtCookieService;
     private final UserDetailsService userDetailsService;
-
-
-    public JwtAuthenticationFilter(
-        JwtService jwtService,
-        JwtCookieService jwtCookieService,
-        UserDetailsService userDetailsService
-    ) {
-        this.jwtService = jwtService;
-        this.jwtCookieService = jwtCookieService;
-        this.userDetailsService = userDetailsService;
-    }
     
 
     @Override

@@ -1,4 +1,4 @@
-package io.github.snomfish.auth;
+package io.github.snomfish.application.auth;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -7,26 +7,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.snomfish.auth.dto.AuthResponse;
-import io.github.snomfish.auth.dto.LoginRequest;
-import io.github.snomfish.auth.dto.RegisterRequest;
+import io.github.snomfish.application.auth.dto.AuthResponse;
+import io.github.snomfish.application.auth.dto.LoginRequest;
+import io.github.snomfish.application.auth.dto.RegisterRequest;
 import io.github.snomfish.security.jwt.JwtCookieService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
     
 
     private final AuthService authService;
-
-
-    public AuthController(
-        AuthService authService
-    ) {
-        this.authService = authService;
-    }
 
 
     @PostMapping("/register")

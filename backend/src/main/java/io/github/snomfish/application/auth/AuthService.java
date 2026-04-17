@@ -1,4 +1,4 @@
-package io.github.snomfish.auth;
+package io.github.snomfish.application.auth;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -8,16 +8,18 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import io.github.snomfish.auth.dto.LoginRequest;
-import io.github.snomfish.auth.dto.RegisterRequest;
-import io.github.snomfish.role.Role;
-import io.github.snomfish.role.RoleRepository;
+import io.github.snomfish.application.auth.dto.LoginRequest;
+import io.github.snomfish.application.auth.dto.RegisterRequest;
+import io.github.snomfish.persistence.role.Role;
+import io.github.snomfish.persistence.role.RoleRepository;
+import io.github.snomfish.persistence.user.User;
+import io.github.snomfish.persistence.user.UserRepository;
 import io.github.snomfish.security.jwt.JwtCookieService;
 import io.github.snomfish.security.jwt.JwtService;
-import io.github.snomfish.user.User;
-import io.github.snomfish.user.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Service
 public class AuthService {
     
@@ -30,24 +32,9 @@ public class AuthService {
     private final JwtCookieService jwtCookieService;
 
 
-    public AuthService(
-        UserRepository userRepository,
-        RoleRepository roleRepository,
-        PasswordEncoder passwordEncoder,
-        AuthenticationManager authenticationManager,
-        JwtService jwtService,
-        JwtCookieService jwtCookieService
+    public void register(
+        RegisterRequest request
     ) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.authenticationManager = authenticationManager;
-        this.jwtService = jwtService;
-        this.jwtCookieService = jwtCookieService;
-    }
-
-
-    public void register(RegisterRequest request) {
 
         if (userRepository.existsByUsername(request.username())) {
             throw new IllegalArgumentException("Username already exists");
@@ -65,7 +52,10 @@ public class AuthService {
     }
 
 
-    public void login(LoginRequest request, HttpServletResponse response) {
+    public void login(
+        LoginRequest request, 
+        HttpServletResponse response
+    ) {
 
         authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(request.username(), request.password())

@@ -1,13 +1,12 @@
-package io.github.snomfish.user;
+package io.github.snomfish.persistence.user;
 
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
-import io.github.snomfish.role.Role;
+import io.github.snomfish.persistence.role.Role;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -40,6 +39,22 @@ public class User {
         inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+        name = "user_friends",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "friend_id")
+    )
+    private Set<User> friends = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+        name = "user_friend_requests",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "request_id")
+    )
+    private Set<User> friendRequests = new HashSet<>();
     
 
     // CONSTRUCTORS
@@ -52,6 +67,8 @@ public class User {
     public String getPasswordHash() {return passwordHash;}
     public Instant getCreatedAt() {return createdAt;}
     public Set<Role> getRoles() {return roles;}
+    public Set<User> getFriends() {return friends;}
+    public Set<User> getFriendRequests() {return friendRequests;}
 
 
     // SETTERS
@@ -60,4 +77,23 @@ public class User {
     public void setPasswordHash(String passwordHash) {this.passwordHash = passwordHash;}
     public void setCreatedAt(Instant createdAt) {this.createdAt = createdAt;}
     public void setRoles(Set<Role> roles) {this.roles = roles;}
+    public void setFriends(Set<User> friends) {this.friends = friends;}
+    public void setFriendRequests(Set<User> friendRequests) {this.friendRequests = friendRequests;}
+
+
+    // HELPERS
+    public boolean friendsContain(User user) {
+        return friends.stream()
+            .anyMatch(u -> u.getUsername().equals(user.getUsername()));
+    }
+    public boolean friendRequestsContain(User user) {
+        return friendRequests.stream()
+            .anyMatch(u -> u.getUsername().equals(user.getUsername()));
+    }
+    public void removeFriend(User user) {
+        friends.removeIf(u -> u.getUsername().equals(user.getUsername()));
+    }
+    public void removeFriendRequest(User user) {
+        friendRequests.removeIf(u -> u.getUsername().equals(user.getUsername()));
+    }
 }

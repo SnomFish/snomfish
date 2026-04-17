@@ -1,4 +1,4 @@
-package io.github.snomfish.auth.dto;
+package io.github.snomfish.application.auth.dto;
 
 public record AuthResponse (
     String message

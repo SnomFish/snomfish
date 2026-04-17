@@ -12,19 +12,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import io.github.snomfish.security.jwt.JwtAuthenticationFilter;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Configuration
 public class SecurityConfig {
     
     
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-
-
-    public SecurityConfig(
-        JwtAuthenticationFilter jwtAuthenticationFilter
-    ) {
-        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
-    }
 
 
     @Bean
