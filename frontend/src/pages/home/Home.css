@@ -1,25 +1,22 @@
-:root {
-    --section-height: 200px;
-}
-
-
 .page-container {
     width: 100%;
     display: flex;
     justify-content: center;
-    background-color: green;
 }
 
 
 .scroll-container {
     width: var(--set-width);
-    height: 100%;
     display: flex;
-    border-left: 2px solid black;
-    border-right: 2px solid black;
-    background-color: red;
+    flex-direction: column;
 }
 .scroll-section {
-    width: 100%;
-    height: var(--section-height);
+    width: var(--set-width);
+    border: 2px solid black;
+}
+.scroll-section.play {
+    height: 400px;
+}
+.scroll-section.about {
+    height: 200px;
 }

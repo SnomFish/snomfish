@@ -1,3 +1,13 @@
 :root {
-    --set-width: 800px;
+    --default-font: "Söhne";
+    --default-font-size: 20px;
+    --navbar-height: 40px;
+    --view-height: calc(1vh - var(--navbar-height));
+    --set-width: 1000px;
+}
+
+* {
+    font-family: var(--default-font), sans-serif;
+    font-size: var(--default-font-size);
+    color: var(--text-colour);
 }

@@ -3,5 +3,5 @@
     height: 100%;
     z-index: -10;
     position: fixed;
-    background-color: grey;
+    background-color: var(--background-colour);
 }

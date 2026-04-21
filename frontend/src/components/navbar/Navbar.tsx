@@ -1,5 +1,8 @@
 import "../../index.css";
+import "../../Themes.css";
 import "./Navbar.css";
+
+import ThemeDropdown from "./ThemeDropdown";
 
 export default function Navbar() {
 
@@ -10,7 +13,7 @@ export default function Navbar() {
           left
         </div>
         <div className="container-right">
-        	right
+        	<ThemeDropdown />
         </div>
       </div>
     </div>

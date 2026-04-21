@@ -12,8 +12,11 @@ export default function home() {
 		<Background />
 		<div className="page-container">
 			<div className="scroll-container">
-				<div className="scroll-section">
-					test
+				<div className="scroll-section play">
+					play
+				</div>
+				<div className="scroll-section about">
+					about
 				</div>
 			</div>
 		</div>
